@@ -1,0 +1,44 @@
+{
+"inbounds": [{
+    "port": 1080,
+    "listen": "127.0.0.1",
+    "protocol": "socks",
+    "settings": {
+      "udp": true
+    },
+    "port": 8001,
+    "listen": "127.0.0.1",
+    "protocol": "http",
+    "settings": {
+	    "udp": true
+    }
+  }],
+  "outbounds": [{
+    "protocol": "vmess",
+    "settings": {
+    "vnext": [{
+	      "address": "sg02.v2net.top",
+	      "port": 22222,
+	      "users":[{"id": "17FBA102-88B1"}]
+	      }]
+    }
+  },{
+    "protocol": "freedom",
+    "settings": {},
+    "tag": "direct"
+  }],
+  "routing": {
+    "domainStrategy": "IPOnDemand",
+    "rules":[
+      {
+        "type": "field",
+        "ip": ["geoip:private"],
+        "outboundTag": "direct"
+      }
+    ]
+  }
+}
+
+
+
+

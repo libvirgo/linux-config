@@ -1,0 +1,234 @@
+set $mod Mod4
+# Set vim key map variables.
+set $up k
+set $down j
+set $left h
+set $right l
+
+# Use Mouse+$mod to drap floadting windows.
+floating_modifier $mod
+
+# Start a terminal.
+bindsym $mod+Return exec konsole
+
+# Kill focused window.
+bindsym $mod+Shift+q kill
+
+# Start program launcher.
+bindsym $mod+d exec rofi -show run
+
+# Sound-section.
+exec --no-startup-id volumeicon
+bindsym $mod+Ctrl+m exec konsole -e 'alsamixer'
+
+# Start Applications.
+bindsym $mod+Ctrl+b exec konsole -e 'bmenu'
+bindsym $mod+F2 exec firefox
+bindsym $mod+F3 exec pcmanfm
+bindsym $mod+Shift+F3 exec pcmanfm_pkexec
+bindsym $mod+F5 exec konsole -e 'mocp'
+bindsym $mod+Shift+d --release exec "killall dunst; exec nofify-send 'restart dunst'"
+bindsym Print exec --no-startup-id i3-scrot
+bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
+bindsym $mod+Shift+h exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
+
+# Change focus.
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+# Alternatively.
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move focused window.
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+# Alternatively.
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Workspace back and forth.
+workspace_auto_back_and_forth yes
+bindsym $mod+b workspace back_and_forth
+bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
+
+# Split in horizontal orientation.
+bindsym $mod+g split h;exec notify-send 'tile horizontally'
+# Split in vertical orientation.
+bindsym $mod+v split v;exec notify-send 'tile vertically'
+bindsym $mod+q split toggle
+
+# Enter fullscreen mode.
+bindsym $mod+f fullscreen toggle
+
+# Change container layout.
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Toggle tiling/floating.
+bindsym $mod+Shift+space floating toggle
+# Change focus between tiling/floating windows.
+bindsym $mod+space focus mode_toggle
+
+# Toggle sticky.
+bindsym $mod+Shift+s sticky toggle
+
+# Focus the parent container.
+bindsym $mod+a focus parent
+# Focus the child container.
+bindsym $mod+c focus child
+
+# Move the currently focused window to the scratchpad.
+bindsym $mod+Shift+minus move scratchpad
+# Show the text scratchpad window.
+bindsym $mod+minus scratchpad show
+
+# Use window title.
+bindsym $mod+t border normal 0
+# Use no window title and a thick border.
+bindsym $mod+y border pixel 2
+# Use neither window title nor border.
+bindsym $mod+u border none
+
+# Workspace names.
+set $ws1  1:
+set $ws2  2:
+set $ws3  3:
+set $ws4  4:
+set $ws5  5:
+set $ws6  6:
+set $ws7  7:
+set $ws8  8:
+
+# Switch to workspace.
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+
+# Move focused container to workspace.
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+
+# Open applications in floating mode
+# for_window [title="alsamixer"] floating enable border pixel 1
+
+# Assign.
+assign [class="Firefox"] $ws2
+
+# Switch to workspace with urgent window automatically.
+for_window [urgent=latest] focus
+
+# Reload the configuration file.
+bindsym $mod+Shift+c reload
+# Restart i3.
+bindsym $mod+Shift+r restart
+# Exit i3.
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+gaps inner 10
+gaps outer 5
+
+# Class                 border  backgr. text    indicator child_border
+client.focused          #2b83a6 #2b83a6 #ffffff #dddddd   #2b83a6
+client.focused_inactive #212121 #212121 #86888c #292d2e   #5a5a5a
+client.unfocused        #212121 #212121 #86888c #292d2e   #5a5a5a
+client.urgent           #d64e4e #d64e4e #ffffff #d64e4e   #d64e4e
+client.placeholder      #212121 #0c0c0c #ffffff #212121   #262626
+client.background       #212121
+
+# Resize window (Also use the mouse for that).
+bindsym $mod+r mode "resize"
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym $left       resize shrink width 10 px or 10 ppt
+        bindsym $down       resize grow height 10 px or 10 ppt
+        bindsym $up         resize shrink height 10 px or 10 ppt
+        bindsym $right      resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys.
+        bindsym Left        resize shrink width 10 px or 10 ppt
+        bindsym Down        resize grow height 10 px or 10 ppt
+        bindsym Up          resize shrink height 10 px or 10 ppt
+        bindsym Right       resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape.
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# i3Status.
+bar {
+    status_command		i3status
+    strip_workspace_numbers	yes
+    separator_symbol " "
+    font			-misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+    font 			pango:Source Code Pro For Powerline Medium 11
+    position 	      		top
+    tray_output       		primary
+    workspace_buttons 		yes
+    colors {
+    	background  #212121
+        statusline  #dddddd
+        separator   #666666
+        # class             border  backgr. text
+        focused_workspace   #2b83a6 #2b83a6 #ffffff
+        active_workspace    #212121 #212121 #ffffff
+        inactive_workspace  #212121 #212121 #86888c
+        urgent_workspace    #d64e4e #d64e4e #ffffff
+        binding_mode        #229c56 #229c56 #ffffff
+    }
+}
+
+# Border.
+new_window pixel 0
+
+bindsym $mod+0 mode "$mode_system"
+set $mode_system [Reboot], [Shutdown], [SwitchUser], [Lock], [Exit]
+mode "$mode_system" {
+    bindsym r exec --no-startup-id i3exit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
+    bindsym u exec --no-startup-id i3exit switch_user, mode "default"
+    bindsym l exec --no-startup-id i3exit lock, mode "default"
+    bindsym e exec --no-startup-id i3exit logout, mode "default"
+    
+    # Exit system mode: "Enter" or "Escape"
+    bindsym Return mode "default"
+    bindsym Excape mode "default"   
+}
+
+# Lock screen.
+bindsym $mod+9 exec --no-startup-id blurlock
+
+# Autostart applications.
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id nm-applet
+exec --no-startup-id xfce4-power-manager
+exec --no-startup-id clipit
+exec --no-startup-id pamac-tray
+exec --no-startup-id xautolock -time 10 -locker blurlock
+exec_always --no-startup-id ff-theme-util
+exec_always --no-startup-id fix_xcursor
